@@ -5,6 +5,7 @@
 // @description  Connects to kahoot cheat app.
 // @author       bitfexl
 // @match        https://kahoot.it/*
+// @match        https://create.kahoot.it/details/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kahoot.it
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js
@@ -14,6 +15,15 @@
 (function () {
     "use strict";
 
+    if (location.href.startsWith("https://kahoot.it/")) {
+        play();
+    } else if (location.href.startsWith("https://create.kahoot.it/details/")) {
+        injectButton();
+    }
+})();
+
+// play on kahoot.it
+function play() {
     setup();
 
     function setup() {
@@ -45,4 +55,21 @@
             }, 500);
         }
     }
-})();
+}
+
+// inject quick launch button on search site (create.kahoot.it/details/)
+function injectButton() {
+    const button = `<button id="play" style="border: none; padding: 24px; background-color: white; background-image: url('https://user-images.githubusercontent.com/54662051/208195498-8a0b5d3b-fd56-42c7-993a-46f1d22968d7.png'); background-size: 40px; background-repeat: no-repeat; background-position: center center; border-radius: 4px; box-shadow: 0 0 3px lightgray; cursor: pointer;"></button>`;
+
+    let jButton = $(button).click(() => {
+        let urlParts = location.href.split("/");
+        let id = urlParts[urlParts.length - 1];
+        location.href = "https://kahoot.it/?kahootId=" + id;
+    });
+
+    setInterval(() => {
+        if ($("#play").length == 0) {
+            $(".button-row__ButtonRow-sc-7auzc0-0").after(jButton);
+        }
+    }, 500);
+}
