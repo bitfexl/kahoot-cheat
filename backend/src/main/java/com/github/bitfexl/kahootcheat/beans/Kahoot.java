@@ -9,6 +9,7 @@ public class Kahoot {
     @Bean
     public KahootClient kahootClientBean() {
         // todo: read password from config
-        return new KahootClient("vuoesnknhbwhrkmahr@tmmbt.net", "vuoesnknhbwhrkmahr@tmmbt.net");
+        // login currently not needed
+        return new KahootClient("mail", "password");
     }
 }
