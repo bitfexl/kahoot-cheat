@@ -7,7 +7,8 @@
 // @match        https://kahoot.it/*
 // @match        https://create.kahoot.it/details/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kahoot.it
-// @grant        none
+// @grant        GM_xmlhttpRequest
+// @connect      localhost
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js
 // @website      https://github.com/bitfexl/kahoot-cheat
 // ==/UserScript==
@@ -27,13 +28,19 @@ function play() {
     setup();
 
     function setup() {
-        // todo: fetch
-        const details = [
-            { question: "A very difficoult question.", kahootId: "af2aab3c-417b-4bbb-94ba-132bc50caf6d", rightAnswers: ["GREEN"] },
-            { question: "A very difficoult question.", kahootId: "af2aab3c-417b-4bbb-94ba-132bc50caf6d", rightAnswers: ["RED", "YELLOW"] },
-        ];
-
         console.log(":::SETUP:::");
+
+        let details = null;
+
+        let id = location.href.split("kahootId=")[1].split("=")[0];
+
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: "http://localhost:3500/details?id=" + id,
+            onload(data) {
+                details = JSON.parse(data.responseText);
+            },
+        });
 
         setInterval(() => checkAndAnswer(details), 200);
     }
