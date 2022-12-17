@@ -11,3 +11,9 @@
 - Go to https://create.kahoot.it/discover and search a Kahoot
 - Open a Kahoot (click on it)
 - Click on the little robot under the title and enter game pin
+
+**TODO**
+
+- Other question types then "quiz"
+- Move everything to Tampermonkey script (?)
+
