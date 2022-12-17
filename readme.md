@@ -15,5 +15,5 @@
 - Run java app
 
 - Go to https://create.kahoot.it/discover and search a Kahoot
-- Open a Kahoot (click on it), refresh the page
+- Open a Kahoot (click on it)
 - Click on the little robot under the title and enter game pin

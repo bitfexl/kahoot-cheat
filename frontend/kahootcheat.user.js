@@ -5,7 +5,7 @@
 // @description  Connects to kahoot cheat app.
 // @author       bitfexl
 // @match        https://kahoot.it/*
-// @match        https://create.kahoot.it/details/*
+// @match        https://create.kahoot.it/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kahoot.it
 // @grant        GM_xmlhttpRequest
 // @connect      localhost
@@ -18,7 +18,7 @@
 
     if (location.href.startsWith("https://kahoot.it/")) {
         play();
-    } else if (location.href.startsWith("https://create.kahoot.it/details/")) {
+    } else if (location.href.startsWith("https://create.kahoot.it/")) {
         injectButton();
     }
 })();
@@ -32,7 +32,7 @@ function play() {
 
         let details = null;
 
-        let id = location.href.split("kahootId=")[1].split("=")[0];
+        let id = location.href.split("kahootId=")[1].split("&")[0];
 
         GM_xmlhttpRequest({
             method: "GET",
